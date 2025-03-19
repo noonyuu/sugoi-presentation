@@ -1,32 +1,33 @@
 {
-  "name": "sugoi-presentation",
-  "description": "すごいプレゼンテーション(仮)",
+  "name": "front",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "wxt",
-    "dev:firefox": "wxt -b firefox",
-    "build": "wxt build",
-    "build:firefox": "wxt build -b firefox",
-    "zip": "wxt zip",
-    "zip:firefox": "wxt zip -b firefox",
-    "compile": "tsc --noEmit",
-    "postinstall": "wxt prepare"
+    "dev": "bunx --bun vite",
+    "build": "tsc -b && bunx --bun vite build",
+    "lint": "eslint .",
+    "preview": "bunx --bun vite preview"
   },
   "dependencies": {
-    "@tailwindcss/postcss": "^4.0.14",
-    "postcss": "^8.5.3",
+    "@tailwindcss/vite": "^4.0.14",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwindcss": "^4.0.14"
   },
   "devDependencies": {
-    "@types/chrome": "^0.0.280",
-    "@types/react": "^19.0.1",
-    "@types/react-dom": "^19.0.2",
-    "@wxt-dev/module-react": "^1.1.2",
-    "typescript": "^5.6.3",
-    "wxt": "^0.19.29"
+    "@eslint/js": "^9.21.0",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react-swc": "^3.8.0",
+    "eslint": "^9.21.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^15.15.0",
+    "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "typescript": "~5.7.2",
+    "typescript-eslint": "^8.24.1",
+    "vite": "^6.2.0"
   }
 }

@@ -1,7 +1,8 @@
 var sessionId: string | null = null;
 
 export const createSessionId = () => {
-  sessionId = window.location.hostname + window.location.pathname + "-" + crypto.randomUUID();
+  const sanitizedPath = window.location.pathname.replace(/\//g, ""); // `/` を削除
+  sessionId = window.location.hostname + sanitizedPath;
 };
 
 export const getSessionId = (): string => {

@@ -2,7 +2,7 @@
   "name": "sugoi-presentation",
   "description": "すごいプレゼンテーション(仮)",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0",
   "type": "module",
   "scripts": {
     "dev": "wxt",
@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.0.14",
+    "firebase": "^11.4.0",
     "postcss": "^8.5.3",
     "qrcode.react": "^4.2.0",
     "react": "^19.0.0",

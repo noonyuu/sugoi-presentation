@@ -9,5 +9,8 @@ export default defineConfig({
   },
   manifest: {
     permissions: ["storage"],
+    host_permissions: [
+      "https://presentation.noonyuu.com/*"
+    ],
   },
 });

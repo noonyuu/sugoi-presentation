@@ -13,7 +13,7 @@ const CommentDashboard = () => {
   const [showAll, setShowAll] = useState(false); // アコーディオンの開閉状態
 
   // 最初の3件を表示し、それ以降は隠す
-  const visibleComments = showAll ? comments : comments.slice(0, 2);
+  const visibleComments = showAll ? comments : comments && comments.slice(0, 2);
 
   useEffect(() => {
     console.log("popupがマウントされました");
@@ -43,7 +43,7 @@ const CommentDashboard = () => {
         })
         .then((data) => {
           setComments(
-            data.map(
+            data && data.map(
               (item: {
                 ID: number;
                 Name: string;
@@ -106,7 +106,7 @@ const CommentDashboard = () => {
           <div className="mb-6 grid grid-cols-2 gap-4 md:grid-cols-4">
             <div className="rounded-lg bg-blue-100 p-4 text-center">
               <div className="text-lg font-bold text-blue-800">
-                {comments.length}
+                {comments && comments.length}
               </div>
               <div className="text-sm text-blue-600">総コメント数</div>
             </div>
@@ -138,7 +138,7 @@ const CommentDashboard = () => {
 
           {/* コメント一覧 */}
           <div className="space-y-4">
-            {visibleComments.map((comment) => (
+            {visibleComments && visibleComments.map((comment) => (
               <div
                 key={comment.id}
                 className="border-l-4 border-indigo-500 py-2 pl-4"
@@ -156,7 +156,7 @@ const CommentDashboard = () => {
           </div>
 
           {/* アコーディオンボタン */}
-          {comments.length > 3 && (
+          {comments && comments.length > 3 && (
             <button
               onClick={() => setShowAll(!showAll)}
               className="mt-4 w-full rounded bg-indigo-500 px-4 py-2 text-white transition hover:bg-indigo-600"

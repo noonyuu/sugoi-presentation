@@ -106,7 +106,7 @@ const CommentDashboard = () => {
           <div className="mb-6 grid grid-cols-2 gap-4 md:grid-cols-4">
             <div className="rounded-lg bg-blue-100 p-4 text-center">
               <div className="text-lg font-bold text-blue-800">
-                {comments && comments.length}
+                {comments ? comments.length : 0}
               </div>
               <div className="text-sm text-blue-600">総コメント数</div>
             </div>

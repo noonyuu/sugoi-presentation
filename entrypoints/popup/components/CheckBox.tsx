@@ -20,7 +20,7 @@ export const CheckBox = () => {
   };
 
   return (
-    <div className="flex" style={{ padding: "10px", fontFamily: "Arial" }}>
+    <div className="flex p-3" style={{ fontFamily: "Arial" }}>
       <label className="flex items-center">
         <input type="checkbox" checked={isHidden} onChange={handleToggle} /> 
         <span className="px-2">プレゼンテーションモード </span>

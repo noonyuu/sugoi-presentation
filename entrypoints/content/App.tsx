@@ -182,7 +182,7 @@ function App() {
   };
 
   return (
-    <div className="absolute w-full h-full">
+    <div className="absolute w-full">
       {/* 特別なアニメーション */}
       {specialAnimations.map(
         (animation, index) => (
@@ -248,12 +248,11 @@ function App() {
           </div>
         ))}
       {isHidden && (
-        <div className="">
+        <div>
           {/* 設定ボタン 常に表示 */}
           <button
             className="absolute right-4 top-4 z-[99999] rounded-full bg-blue-500 p-2 text-white shadow-lg transition-all hover:bg-blue-600"
             onClick={toggleSettings}
-            title={showSettings ? "設定を閉じる" : "設定を開く"}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -274,7 +273,7 @@ function App() {
 
           {/* 右上の設定パネル */}
           {showSettings && (
-            <div className="absolute right-4 top-16 z-[99999] flex w-[280px] flex-col items-center justify-center gap-y-2 rounded-md border border-gray-200 bg-white/95 p-4 shadow-lg transition-all">
+            <div className="absolute right-4 top-16 z-[99999] flex w-70 flex-col items-center justify-center gap-y-2 rounded-md border border-gray-200 bg-white/95 p-4 shadow-lg transition-all">
               <div className="mb-3 flex w-[248px] items-center justify-between">
                 <h3 className="text-lg font-bold text-black">
                   コメント表示設定
@@ -297,13 +296,13 @@ function App() {
               </div>
               {/* フォント選択 */}
               {/* セレクトボックス & 検索 */}
-              <div className="w-[248px]">
+              <div className="w-62">
                 <FontSelector
                   currentFont={currentFont}
                   onFontChange={handleFontChange}
                 />
               </div>
-              <div className="mb-4 w-[248px]">
+              <div className="w-62">
                 <ColorSelector
                   initialColors={allowedColors}
                   onColorChange={handleColorChange}

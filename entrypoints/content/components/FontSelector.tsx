@@ -67,15 +67,15 @@ const FontSelector: React.FC<FontSelectorProps> = ({ onFontChange, currentFont }
   };
 
   return (
-    <div className="font-selector">
-      <label htmlFor="font-select" className="font-selector-label">
+    <div className="w-full mb-3">
+      <label htmlFor="font-select" className="block mb-1 text-500 text-slate-700">
         フォント選択:
       </label>
       <select
         id="font-select"
         value={currentFont}
         onChange={handleFontChange}
-        className="font-selector-select"
+        className="w-full py-2 px-3 border border-gray-300! rounded bg-white text-sm cursor-pointer transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         disabled={!fontsLoaded}
       >
         {!fontsLoaded && <option value="">読み込み中...</option>}
@@ -89,7 +89,7 @@ const FontSelector: React.FC<FontSelectorProps> = ({ onFontChange, currentFont }
           </option>
         ))}
       </select>
-      {!fontsLoaded && <span className="loading-indicator">フォントを読み込み中...</span>}
+      {!fontsLoaded && <span className="block text-sm text-slate-500 mt-1">フォントを読み込み中...</span>}
     </div>
   );
 };

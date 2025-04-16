@@ -40,23 +40,23 @@ const ColorSelector: React.FC<ColorSelectorProps> = ({
   };
 
   return (
-    <div className="color-selector">
-      <div className="color-selector-title">表示する色:</div>
-      <div className="color-options">
+    <div className="w-full mb-4">
+      <div className="text-base mb-2 text-slate-700">表示する色:</div>
+      <div className="grid gap-2 grid-cols-2">
         {COLOR_OPTIONS.map((color) => (
-          <div key={color.value} className="color-option">
-            <label className="color-checkbox-label">
+          <div key={color.value} className="mb-2">
+            <label className="flex items-center cursor-pointer">
               <input
                 type="checkbox"
                 checked={selectedColors.includes(color.value)}
                 onChange={() => handleColorToggle(color.value)}
-                className="color-checkbox"
+                className="mr-2 cursor-pointer"
               />
               <span 
-                className="color-sample" 
+                className="inline-block size-4 rounded-sm mr-2 border border-solid border-slate-300" 
                 style={{ backgroundColor: color.code }}
               ></span>
-              <span className="color-name">{color.name}</span>
+              <span className="text-sm text-slate-950">{color.name}</span>
             </label>
           </div>
         ))}

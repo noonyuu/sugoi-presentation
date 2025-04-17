@@ -41,6 +41,8 @@ const COLOR_MAP: { [key: string]: string } = {
 };
 
 function App() {
+  const [isQrCode, setIsQrCode] = useState<boolean>(false);
+  const [qrCode, setQrCode] = useState<string>("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [isAccordion, setIsAccordion] = useState<boolean>(true);
   const [commentOpacity, setCommentOpacity] = useState<number>(100);
@@ -48,8 +50,6 @@ function App() {
   const [specialAnimations, setSpecialAnimations] = useState<
     SpecialAnimation[]
   >([]);
-  const [fonts, setFonts] = useState([]);
-  const [selectedFont, setSelectedFont] = useState("Roboto");
   const [currentFont, setCurrentFont] = useState<string>(
     "'Noto Sans JP', sans-serif",
   );
@@ -169,6 +169,39 @@ function App() {
     });
   }, [isHidden]);
 
+  // -- QRコード関連 --
+  useEffect(() => {
+    const fetchQrCode = localStorage.getItem("qrCode");
+    if (fetchQrCode) {
+      setQrCode(fetchQrCode);
+      setIsQrCode(true);
+    } else {
+      setIsAccordion(false)
+    }
+  }, []);
+  // QRコードの生成
+  const handleCreateQr = () => {
+    // urlがcanvaの時のみ発行する
+    const url = window.location.href;
+    if (!url.includes("canva")) {
+      alert("CanvaのURLでのみQRコードを発行できます");
+      return;
+    }
+    setQrCode(
+      `https://presentation.noonyuu.com/app/comment/form/${getSessionId()}`,
+    );
+    localStorage.setItem(
+      'qrCode', `https://presentation.noonyuu.com/app/comment/form/${getSessionId()}`,
+    );
+    setIsQrCode(true);
+  };
+  // 削除
+  const handleDeleteQr = () => {
+    setQrCode("");
+    localStorage.removeItem("qrCode");
+    setIsQrCode(false);
+  };
+
   // 設定ボックスの表示/非表示を切り替え
   const toggleSettings = () => {
     setShowSettings(!showSettings);
@@ -232,7 +265,7 @@ function App() {
         messages.map((message, index) => (
           <div
             key={index}
-            className={`absolute z-40 break-words rounded p-2 text-6xl text-black ${
+            className={`absolute z-40 rounded p-2 text-6xl break-words text-black ${
               message.type === "top" ? "bottom-comment" : "slide-comment"
             }`}
             style={{
@@ -250,8 +283,8 @@ function App() {
       {isHidden && (
         <div>
           {/* 設定ボタン 常に表示 */}
-          <button
-            className="absolute right-4 top-4 z-[99999] rounded-full bg-blue-500 p-2 text-white shadow-lg transition-all hover:bg-blue-600"
+          {/* <button
+            className="absolute top-4 right-4 z-[99999] rounded-full bg-blue-500 p-2 text-white shadow-lg transition-all"
             onClick={toggleSettings}
           >
             <svg
@@ -269,14 +302,18 @@ function App() {
               <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
               <circle cx="12" cy="12" r="3" />
             </svg>
-          </button>
+          </button> */}
 
           {/* 右上の設定パネル */}
-          {showSettings && (
-            <div className="absolute right-4 top-16 z-[99999] flex w-70 flex-col items-center justify-center gap-y-2 rounded-md border border-gray-200 bg-white/95 p-4 shadow-lg transition-all">
+          {showSettings ? (
+            <div className="absolute top-16 right-4 z-[99999] flex flex-col items-center justify-center gap-y-2 rounded-md border border-gray-200 bg-white p-4 shadow-lg transition-all">
               <div className="mb-3 flex w-[248px] items-center justify-between">
                 <h3 className="text-lg font-bold text-black">
                   コメント表示設定
+                            <button
+                className="w-full relative flex items-center text-gray-600 transition-colors"
+                onClick={() => setShowSettings(false)}
+              >かくす</button>
                 </h3>
               </div>
 
@@ -296,26 +333,29 @@ function App() {
               </div>
               {/* フォント選択 */}
               {/* セレクトボックス & 検索 */}
-              <div className="w-62">
+              <div className="w-[248px]">
                 <FontSelector
                   currentFont={currentFont}
                   onFontChange={handleFontChange}
                 />
               </div>
-              <div className="w-62">
+              <div className="w-[248px]">
                 <ColorSelector
                   initialColors={allowedColors}
                   onColorChange={handleColorChange}
                 />
               </div>
             </div>
+          ):
+          (
+            <div></div>
           )}
 
           {/* QRコードパネル */}
           {isAccordion ? (
-            <div className="absolute left-0 top-4 z-[99999] h-[256px] w-[256px] rounded-md border border-gray-200 bg-white shadow-lg">
+            <div style={{ width: 256 }} className="absolute top-4 left-0 z-[99999] rounded-md border border-gray-200 bg-white shadow-lg h-[216px] transition-all">
               <button
-                className="absolute left-2 top-2 flex size-8 items-center justify-center text-gray-600 transition-colors hover:text-gray-800"
+                className="w-full relative flex items-center text-gray-600 transition-colors p-2"
                 onClick={() => setIsAccordion(false)}
               >
                 <svg
@@ -332,22 +372,24 @@ function App() {
                 >
                   <path d="m15 18-6-6 6-6" />
                 </svg>
+                <div>コメント用QRコード</div>
+                <div onClick={handleDeleteQr} className="absolute right-2 text-red-400 cursor-pointer">削除</div>
               </button>
-              <div className="flex h-full flex-col items-center justify-center gap-y-2">
+              <div className="flex flex-col items-center justify-center gap-y-2">
                 <div className="mb-2 font-medium text-black">
-                  コメント用QRコード
+                  
                 </div>
-                <QRCodeSVG
-                  value={`https://presentation.noonyuu.com/app/comment/form/${getSessionId()}`}
-                  size={192}
-                  level="H"
-                />
+                {isQrCode ? (
+                  <QRCodeSVG value={qrCode} size={180} level="H" />
+                ) : (
+                  <button onClick={handleCreateQr} className="border-custom p-2 text-slate-950 cursor-pointer rounded-lg">QR作成</button>
+                )}
               </div>
             </div>
           ) : (
             <div>
               <button
-                className="absolute left-0 top-4 z-[99999] flex items-center justify-center rounded-r-md border border-gray-200 bg-white p-2 text-gray-700 shadow-md transition-colors hover:bg-gray-100"
+                className="absolute top-4 left-0 z-[99999] flex items-center justify-center rounded-r-md border border-gray-200 bg-white p-2 text-gray-700 shadow-md transition-colors hover:bg-gray-100"
                 onClick={() => setIsAccordion(true)}
               >
                 <svg

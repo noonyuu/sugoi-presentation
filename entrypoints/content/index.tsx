@@ -3,12 +3,13 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 
 export default defineContentScript({
-  matches: ["*://www.google.com/*", "*://www.canva.com/*"],
+  // matches: ["*://www.google.com/*", "*://www.canva.com/*"],
+   matches: [ "http://*/*", "https://*/*" ],
   cssInjectionMode: "ui",
 
   async main(ctx) {
     const ui = await createShadowRootUi(ctx, {
-      name: "wxt-react-example",
+      name: "sini-jikyouzatudanban-kai",
       position: "inline",
       anchor: "body",
       append: "first",

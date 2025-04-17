@@ -1,6 +1,4 @@
-// FontSelector.tsx
 import React, { useState, useEffect } from 'react';
-import '../style.css';
 
 // 提供するGoogle Fontsのリスト
 const GOOGLE_FONTS = [
@@ -47,14 +45,6 @@ const FontSelector: React.FC<FontSelectorProps> = ({ onFontChange, currentFont }
     };
     
     loadFonts();
-    
-    // クリーンアップ関数
-    return () => {
-      const link = document.querySelector('link[rel="stylesheet"]');
-      if (link) {
-        link.remove();
-      }
-    };
   }, []);
 
   // フォント選択時の処理
@@ -75,7 +65,7 @@ const FontSelector: React.FC<FontSelectorProps> = ({ onFontChange, currentFont }
         id="font-select"
         value={currentFont}
         onChange={handleFontChange}
-        className="w-full py-2 px-3 border border-gray-300! rounded bg-white text-sm cursor-pointer transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        className="border-custom w-full cursor-pointer rounded bg-white px-3 py-2 text-sm text-slate-950 transition duration-200 ease-in-out"
         disabled={!fontsLoaded}
       >
         {!fontsLoaded && <option value="">読み込み中...</option>}

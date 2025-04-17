@@ -8,12 +8,9 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-.output
-stats.html
-stats-*.json
-.wxt
-web-ext.config.ts
-package-lock.json
+dist
+dist-ssr
+*.local
 
 # Editor directories and files
 .vscode/*
@@ -25,3 +22,5 @@ package-lock.json
 *.njsproj
 *.sln
 *.sw?
+
+.output/

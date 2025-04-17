@@ -7,5 +7,10 @@ export default defineConfig({
   runner: {
     startUrls: ["https://google.com"],
   },
-  
+  manifest: {
+    permissions: ["storage"],
+    host_permissions: [
+      "https://presentation.noonyuu.com/*"
+    ],
+  },
 });

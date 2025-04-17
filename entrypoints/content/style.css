@@ -63,3 +63,8 @@
     transform: scale(1.1);
   }
 }
+
+.border-custom {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}

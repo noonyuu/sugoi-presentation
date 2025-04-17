@@ -283,7 +283,7 @@ function App() {
       {isHidden && (
         <div>
           {/* 設定ボタン 常に表示 */}
-          {/* <button
+          <button
             className="absolute top-4 right-4 z-[99999] rounded-full bg-blue-500 p-2 text-white shadow-lg transition-all"
             onClick={toggleSettings}
           >
@@ -302,7 +302,7 @@ function App() {
               <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
               <circle cx="12" cy="12" r="3" />
             </svg>
-          </button> */}
+          </button>
 
           {/* 右上の設定パネル */}
           {showSettings ? (
@@ -310,10 +310,6 @@ function App() {
               <div className="mb-3 flex w-[248px] items-center justify-between">
                 <h3 className="text-lg font-bold text-black">
                   コメント表示設定
-                            <button
-                className="w-full relative flex items-center text-gray-600 transition-colors"
-                onClick={() => setShowSettings(false)}
-              >かくす</button>
                 </h3>
               </div>
 
